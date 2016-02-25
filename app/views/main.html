@@ -1,0 +1,74 @@
+
+	<h1>List of companies</h1>
+
+	<!-- TABLE OF ALL COMPANIES-->
+	<table class="table table-striped ">
+		<tr>
+			<th>Name</th>
+			<th>Company Estimate Earnings</th>        
+			<th>Total Child's Income</th>
+			<th>View details</th>		
+			<th>Child companies</th> 
+		</tr>
+		<!-- Loop through company -->
+		<tr ng-repeat="company in companies">		
+			<td>{{ company.name }}</td>
+			<td>{{ company.income | currency }}</td>
+			<td ng-click="showSum(company.total, company.name, $event)">
+				<a>Show</a> 
+				<span ng-repeat="tot in company.total" ng-hide="true">{{ tot.income }}<br></span>			
+			</td>		
+			<td><a href="#/{{ company.name }}">Show details</a></td>
+			<td>
+				<table border class="table">
+					<tr>
+						<th>Name</th>
+						<th>Company Estimate Earnings</th>					
+					</tr>
+					
+					<!-- Loop through child companies -->
+					 <tr ng-repeat="subCompany in company.childs">
+					   <td>{{subCompany.name}}</td>
+					   <td>{{subCompany.income | currency}}</td>
+					</tr> 
+					 
+				</table> 
+			</td>		
+		</tr> 	
+	</table>
+
+
+<button class="btn btn-success btn-block" ng-click="hideAddForm = false" ng-disabled="hideAddForm === false">Add new company</button>
+
+<!-- FORM FOR ADDING NEW COMPANY -->
+<form action="/" class="col-md-4 col-md-offset-4" ng-hide="hideAddForm" ng-submit="addCompany()">
+    <h2 class="text-center">Add new company</h2>	    
+	   <div class="form-group">
+        <label>Select parent company</label>
+        <select class="form-control" ng-model="choosedParent">
+		    <option value=""></option>
+			<option ng-repeat="company in companies" value="{{ company.$id }}">{{ company.name }}</option>
+		</select>        
+      </div>
+	  
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" class="form-control" ng-model="newCompanyName" />
+        <br/>
+      </div>
+      <div class="form-group">
+        <label>Income</label>
+        <input type="number" name="income" class="form-control" ng-model="newCompanyIncome"  />
+        <br/>
+      </div>
+      <div class="form-group">
+        <label>Employees</label>
+        <input type="number" name="employees" class="form-control" ng-model="newCompanyEmployees" />
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Submit" class="form-control btn-success" />
+      </div>
+      <div class="form-group">
+        <input type="button" value="Cancel" class="form-control btn-default" ng-click="hideAddForm = true" />
+      </div>
+</form>

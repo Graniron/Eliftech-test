@@ -1,0 +1,52 @@
+<div class="col-md-4 col-md-offset-4">
+    <h1>Company profile</h1>
+  
+	<div ng-repeat="company in companies | filter:companyName">	    
+		<h3>Name: {{ company.name }}</h3>
+		<p>Income: {{ company.income | currency}}</p>
+		<p>Employees: {{ company.employees }}</p>
+        <hr>
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Estimate Earnings</th>
+				<th>Employees</th>				
+			</tr>
+			<tr ng-repeat="child in company.childs">
+				  <h4>Childs</h4>
+				  <td>{{ child.name }}</td>
+				  <td>{{ child.income | currency}}</td>
+				  <td>{{ child.employees }}</td>
+			</tr>	
+        </table		
+    </div>
+	
+	<button class="btn btn-info" ng-click="hideEditForm = false" ng-disabled="hideEditForm === false"">Edit Company information</button>
+	<button class="btn btn-danger" ng-click="deleteCompany()">Delete company</button>
+	
+	<!-- 	Editing form -->
+	<form ng-hide="hideEditForm" ng-submit="editCompany(editedCompanyName, editedCompanyIncome, editedCompanyEmployees)">
+		  <h2 class="text-center">Edit company</h2>
+		  <div class="form-group">
+			<label>Name</label>
+			<input type="text" name="name" class="form-control" ng-model="editedCompanyName" />
+			<br/>
+		  </div>
+		  <div class="form-group">
+			<label>Income</label>
+			<input type="number" name="income" class="form-control" ng-model="editedCompanyIncome"  />
+			<br/>
+		  </div>
+		  <div class="form-group">
+			<label>Employees</label>
+			<input type="number" name="employees" class="form-control" ng-model="editedCompanyEmployees" />
+		  </div>
+		  <div class="form-group">
+			<input type="submit" value="Submit" class="form-control btn-success" />
+		  </div>
+		  <div class="form-group">
+			<input type="button" value="Cancel" class="form-control btn-default" ng-click="hideEditForm = true" />
+		  </div>
+	</form>   
+</div>
+

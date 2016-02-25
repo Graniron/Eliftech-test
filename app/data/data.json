@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Eliftech",
+        "income": 53000,
+        "employees": 25
+    },
+    {
+        "name": "Softserve",
+        "income": 678000,
+        "employees": 125
+    },
+    {
+        "name": "Epam",
+        "income": 77000,
+        "employees": 880
+    },
+    {
+        "name": "Eleks",
+        "income": 312000,
+        "employees": 900
+    },
+    {
+        "name": "Globallogic",
+        "income": 22600,
+        "employees": 1360
+    }
+]
